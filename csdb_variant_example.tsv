@@ -1,0 +1,10 @@
+caseid	date	version	category	type	filters	chrom	pos	ref	alt	gene	transcript	consequence	csyntax	psyntax	exon	popaf	annotations	coverage	altreads	vaf
+H_IJ-NA12878-NA12878_K12	2021-01-13 21:44:39	beta	FILTERED	INDEL	LowReads	chrX	40073598	GT	G	BCOR	NA	frameshift_variant	c.1747del	p.T583Pfs*6	4/15	NA	NA	91	2	2.2
+H_KA-104895-BM-d0Q-lib4	2020-11-17 20:00:15	beta	PASS	SNV	PASS	chr15	90088702	C	T	IDH2	NA	missense_variant	c.419G>A	p.R140Q	4/11	0.006539	NA	71	30	42.3
+H_KA-104895-BM-d0Q-lib4	2020-11-17 20:00:15	beta	PASS	SNV	PASS	chr17	76736877	G	T	SRSF2	NA	missense_variant	c.284C>A	p.P95H	1/2	0.02178	NA	89	39	43.8
+H_KA-104895-BM-d0Q-lib4	2020-11-17 20:00:15	beta	PASS	SNV	PASS	chrX	124051313	A	G	STAG2	NA	splice_acceptor_variant	c.1117-2A>G	c.1117-2A>G		NA	NA	51	23	45.1
+H_KA-104895-BM-d0Q-lib4	2020-11-17 20:00:15	beta	FILTERED	SNV	LowReads	chr13	28018505	C	A	FLT3	NA	missense_variant	c.2503G>T	p.D835Y	20/24	NA	NA	80	3	3.8
+H_KA-104895-BM-d0Q-lib4	2020-11-17 20:00:15	beta	FILTERED	INDEL	LowReads	chr20	32434638	AG	A	ASXL1	NA	frameshift_variant	c.1934del	p.G645Vfs*58	13/13	2.271	NA	90	4	4.4
+H_KA-142639-BM-d0-lib4	2020-11-17 19:53:32	beta	PASS	SNV	PASS	chr4	105275056	C	T	TET2	NA	stop_gained	c.4546C>T	p.R1516*	11/11	0.03143	NA	57	5	8.8
+H_KA-142639-BM-d0-lib4	2020-11-17 19:53:32	beta	PASS	SNV	PASS	chr13	28018503	A	C	FLT3	NA	missense_variant	c.2505T>G	p.D835E	20/24	NA	NA	61	25	41.0
+H_KA-146218-0909962_1-lib1	2020-11-17 22:03:20	beta	PASS	SNV	PASS	chr1	114713909	G	T	NRAS	NA	missense_variant	c.181C>A	p.Q61K	3/7	NA	NA	35	9	25.7
