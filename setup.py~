@@ -1,0 +1,15 @@
+from setuptools import setup, find_packages
+
+setup(
+    name='GenomicsTool',  # Name of your package
+    version='0.1',        # Version of your module
+    packages=find_packages(),
+    install_requires=[
+        # Any dependencies, e.g., 'numpy', 'pandas'
+    ],
+    entry_points={
+        'console_scripts': [
+            # If you want to create command-line tools
+        ]
+    }
+)
