@@ -7,9 +7,4 @@ setup(
     install_requires=[
         'pandas','pysam'
     ],
-    entry_points={
-        'console_scripts': [
-            # If you want to create command-line tools
-        ]
-    }
 )
