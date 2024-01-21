@@ -79,21 +79,24 @@ def vepToTable(csq,vep_fields):
     if 'MAX_AF' in df.columns:
         df['pop_af'] = df['MAX_AF'].apply(lambda x: 0 if x=='' else round(float(x)*100,5))
 
+    df = df.replace('', pd.NA)
+
+    df['annotations'] = [[] for _ in range(len(df))]
     if 'Existing_variation' in df.columns:
-        df['annotations'] = df['Existing_variation'].apply(lambda x: [] if x=='' else x.split('&'))
+        df['annotations'] = df['Existing_variation'].apply(lambda x: [] if pd.isna(x) else x.split('&'))
 
     # get assay-specific custom annotations
     dbcolumn = next((col for col in df.columns if '_DB' in col), None)
     if dbcolumn:
-        df['annotations'] = df['annotations'] + ['DB=' + df[dbcolumn]]
-
+        df['annotations'] = df.apply(lambda r: r['annotations'] + ['DB=' + str(r[dbcolumn])] if pd.notna(r['annotations']) and pd.notna(r[dbcolumn]) else r['annotations'], axis=1)
+        
     blacklist = next((col for col in df.columns if '_BLACKLIST' in col), None)
     if blacklist and (df[blacklist]==1).any():
-        df['annotations'] = df['annotations'] + ['BLACKLIST']
+        df['annotations'] = df.apply(lambda r: r['annotations'] + ['BLACKLIST'] if pd.notna(r['annotations']) and pd.notna(r[blacklist]) else r['annotations'], axis=1)
 
     whitelist = next((col for col in df.columns if '_WHITELIST' in col), None)
     if whitelist and (df[whitelist]==1).any():
-        df['annotations'] = df['annotations'] + ['WHITELIST']
+        df['annotations'] = df.apply(lambda r: r['annotations'] + ['WHITELIST'] if pd.notna(r['annotations']) and pd.notna(r[whitelist]) else r['annotations'], axis=1)
 
     df['annotations'] = df['annotations'].apply(lambda x: ';'.join(x))
 
@@ -294,7 +297,7 @@ class ClinSeqTools:
 
             # create c and p syntaxes
             if 'HGVSc' in df.columns:
-                df['csyntax'] = df['HGVSc'].apply(lambda x: x.split(':')[1] if ':' in x else 'noncoding')
+                df['csyntax'] = df['HGVSc'].apply(lambda x: x.split(':')[1] if pd.notna(x) and ':' in x else 'noncoding')
                 df.drop(columns='HGVSc',inplace=True)
 
                 # create valid upstream/downstream csyntax
@@ -311,7 +314,7 @@ class ClinSeqTools:
                 df.loc[(df['csyntax']=='noncoding') & (df['consequence'].str.contains('downstream')) & (df['STRAND']==-1),'csyntax'] = df[(df['csyntax']=='noncoding') & (df['consequence'].str.contains('downstream')) & (df['STRAND']==-1)].apply(lambda r: "c.+"+str(r['cds_position'])+revcomp(r['ref'])+'>'+revcomp(r['alt']),axis=1)
 
             if 'HGVSp' in df.columns:
-                df['psyntax'] = df['HGVSp'].apply(lambda x: re.sub("\%3D",'=',convert_aa(x.split(':')[1])) if ':' in x else None)
+                df['psyntax'] = df['HGVSp'].apply(lambda x: re.sub("\%3D",'=',convert_aa(x.split(':')[1])) if pd.notna(x) and ':' in x else None)
                 df.loc[(df['psyntax'].isna()),'psyntax'] = df.loc[(df['psyntax'].isna()),'csyntax']
                 df.drop(columns='HGVSp',inplace=True)
 

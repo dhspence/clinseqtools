@@ -88,13 +88,8 @@ def vepToTable(csq,header):
 
     # if no symbol, use Gene ID
     df.loc[df['SYMBOL']=='','SYMBOL'] = df.loc[df['SYMBOL']=='','Gene']
-
-    df.loc[df['STRAND']=='1','STRAND'] = '+'
-    df.loc[df['STRAND']=='-1','STRAND'] = '-'
-
     if 'DISTANCE' in df.columns:
         df['DISTANCE'] = df['DISTANCE'].apply(lambda x: 0 if x=='' else int(x))
-
     if 'PICK' in df.columns:
         df['PICK'] = df['PICK'].apply(lambda x: 0 if x=='' else 1)
 
