@@ -6,4 +6,10 @@ LABEL Base Spencerlab image with python3 and some standard bioinformatics module
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN pip install git+https://github.com/dhspence/clinseqtools.git@dev
+WORKDIR /tmp/
+
+RUN git clone -b dev https://github.com/dhspence/clinseqtools.git && \
+    cd clinseqtools && \
+    pip install . && \
+    cd .. && \
+    rm -rf clinseqtools \
