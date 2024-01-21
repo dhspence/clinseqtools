@@ -1,2 +1,2 @@
-# cletools
-A python utility for clinical sequencing in the CLE
+# clinseqtools
+A python utility for clinical sequencing at Wash U
